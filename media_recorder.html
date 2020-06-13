@@ -56,6 +56,8 @@
         this.mediaRecorder.stop()
       },
       deviceIdChanged() {
+        console.log('deviceChanged')
+        
         navigator.getUserMedia (
           {
             audio: { deviceId: { exact: this.deviceId } }
