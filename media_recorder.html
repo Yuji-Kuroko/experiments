@@ -26,7 +26,7 @@
 <div class='container content' id='app'>
 <div class='section'>
 <div class='content'>
-<select class='select' on:change='deviceIdChanged()' v-model='deviceId'>
+<select class='select' v-on:change='deviceIdChanged()' v-model='deviceId'>
 <option v-bind:value='op.value' v-for='op in deviceOptions' v-text='op.text'></option>
 </select>
 </div>
@@ -57,7 +57,7 @@
       },
       deviceIdChanged() {
         console.log('deviceChanged')
-        
+
         navigator.getUserMedia (
           {
             audio: { deviceId: { exact: this.deviceId } }
