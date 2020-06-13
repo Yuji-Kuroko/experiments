@@ -58,10 +58,11 @@
       deviceIdChanged() {
         console.log('deviceChanged')
 
-        navigator.getUserMedia (
+        navigator.mediaDevices.getUserMedia (
           {
             audio: { deviceId: { exact: this.deviceId } }
-          },
+          }
+        ).then(
           // Success
           (stream) => {
             console.log('success callback')
@@ -80,22 +81,23 @@
               var audioURL = window.URL.createObjectURL(e.data);
               audio.src = audioURL;
             }
-          },
-          // Error
-          function(err) {
-            console.log('The following gUM error occured: ' + err)
           }
+        ).catch(
+          // Error
+          (err) => {
+            console.log('The following gUM error occured: ' + err)
+          }  
         )
-        
       }
     },
     mounted: function () {
-      if (navigator.getUserMedia) {
+      if (navigator.mediaDevices.getUserMedia) {
         console.log('getUserMedia supported.')
-        navigator.getUserMedia (
+        navigator.mediaDevices.getUserMedia (
           {
             audio: true
-          },
+          }
+        ).then(
           // Success callback
           (stream) => {
             console.log('success callback')
@@ -114,10 +116,10 @@
               var audioURL = window.URL.createObjectURL(e.data);
               audio.src = audioURL;
             }
-          },
-  
+          }
+        ).catch(
           // Error callback
-          function(err) {
+          (err) => {
             console.log('The following gUM error occured: ' + err)
           }
         )
